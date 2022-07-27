@@ -23,14 +23,40 @@ window.onload = function(){
 }
 
 function checkIfGameIsWon(player1, player2){
-
+    return checkIfPlayerWon(player1) || checkIfPlayerWon(player2)
 }
 
-/* checkIfPlayerWon(player){
+function checkIfPlayerWon(player){
+    player.forEach()
+} 
+
+function checkRow(player){
     player.forEach((row)=>{
-        if(row.indexOf())
+        if(row === [1,1,1]){
+            return true
+        }
     })
-} */
+
+    return false
+}
+
+function checkColumn(player){
+    for(let x = 0; x != player[0].length; x++){
+        if(player[0][x]==1 && player[1][x]==1 && player[2][x]==1){
+            return true
+        }
+    }
+
+    return false
+}
+
+function checkDiagnols(player){
+    if((player[0][0] == 1 && player[1][1] && player[2][2] == 1) || (player[0][2] == 1 && player[1][1] ==1 && player[2][0]==1)){
+        return true
+    }
+
+    return false
+}
 
 
 function getAllButtonsByID(buttons, isplayer1, player1, player2){
