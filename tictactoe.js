@@ -29,11 +29,12 @@ function checkIfPlayerWon(player){
 } 
 
 function checkRow(player){
-    player.forEach((row)=>{
-        if(row === [1,1,1]){
+    for(let row = 0; row != player.length; row++){
+        console.log(player[row])
+        if(JSON.stringify(player[row])==JSON.stringify([1,1,1])){
             return true
         }
-    })
+    }
 
     return false
 }
