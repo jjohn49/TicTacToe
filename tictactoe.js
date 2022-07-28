@@ -1,14 +1,12 @@
 window.onload = function(){
 
-    var buttons = []
-
-    var player1 = [
+    let player1 = [
         [0,0,0],
         [0,0,0],
         [0,0,0]
     ]
 
-    var player2 = [
+    let player2 = [
         [0,0,0],
         [0,0,0],
         [0,0,0]
@@ -17,19 +15,16 @@ window.onload = function(){
     //acting as a bool 1 = true and 0 = false
     let isPlayer1 = [1]
 
-    getAllButtonsByID(buttons, isPlayer1, player1, player2)
+    getAllButtonsByID(isPlayer1, player1, player2)
 
 }
 
 function checkIfPlayerWon(player){
-    if (checkRow(player) || checkColumn(player) || checkDiagnols(player)){
-        console.log("WONNNNNNNN")
-        alert("Player has won the game")
-    }
+    return checkRow(player) || checkColumn(player) || checkDiagnols(player)
 } 
 
 function checkRow(player){
-    for(let row = 0; row != player.length; row++){
+    for(let row = 0; row <= player.length; row++){
         console.log(player[row])
         if(JSON.stringify(player[row])==JSON.stringify([1,1,1])){
             return true
@@ -48,7 +43,7 @@ function toggle(bool){
 }
 
 function checkColumn(player){
-    for(let x = 0; x != player[0].length; x++){
+    for(let x = 0; x <= player[0].length; x++){
         if(player[0][x]==1 && player[1][x]==1 && player[2][x]==1){
             return true
         }
@@ -58,18 +53,14 @@ function checkColumn(player){
 }
 
 function checkDiagnols(player){
-    if((player[0][0] == 1 && player[1][1] && player[2][2] == 1) || (player[0][2] == 1 && player[1][1] ==1 && player[2][0]==1)){
-        return true
-    }
-
-    return false
+    return (player[0][0] == 1 && player[1][1] && player[2][2] == 1) || (player[0][2] == 1 && player[1][1] ==1 && player[2][0]==1)
 }
 
 
-function getAllButtonsByID(buttons, isPlayer1, player1, player2){
+function getAllButtonsByID(isPlayer1, player1, player2){
     [0,1,2].forEach((letter)=>{
         [0,1,2].forEach((num)=>{
-            buttons.push(addEventListenersToButtons(isPlayer1,player1, player2, letter,num))
+            addEventListenersToButtons(isPlayer1,player1, player2, letter,num)
         })
     })
 }
@@ -82,12 +73,16 @@ function addEventListenersToButtons(isPlayer1, player1, player2, letter, num){
             player1[letter][num] = 1
             button.appendChild(document.createTextNode("X"))
             button.style.backgroundColor = '#ff0000'
-            checkIfPlayerWon(player1)
+            if(checkIfPlayerWon(player1)){
+                alert("Player 1 has won!")
+            }
         }else{
             player2[letter][num] = 1
             button.appendChild(document.createTextNode("O"))
             button.style.backgroundColor = '#0000FF'
-            checkIfPlayerWon(player2)
+            if(checkIfPlayerWon(player2)){
+                alert("Player 2 has won")
+            }
         }
         toggle(isPlayer1)
         console.log(player1)
