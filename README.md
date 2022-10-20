@@ -1,2 +1,2 @@
 # TicTacToe
-Quick little project to practice JS
+Practiceign JS and Manipulating the DOM
